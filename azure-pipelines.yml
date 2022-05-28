@@ -67,7 +67,7 @@ steps:
       Package: $(imageName).$(Build.BuildNumber).zip
       Replace: 'false'
   
-  - task: OctopusCreateRelease@5
+  - task: OctopusCreateRelease@4
     displayName: Create Octopus Release
     inputs:
       OctoConnectedServiceName: 'octopus'
