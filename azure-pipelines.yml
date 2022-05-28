@@ -16,7 +16,7 @@ steps:
     inputs:
       targetType: inline
       script: |
-        imageName=$(echo "$(System.TeamProject)" | awk '{print tolower($0)}');
+        imageName=$(echo "$(Build.SourceBranchName)" | awk '{print tolower($0)}');
         echo "##vso[task.setvariable variable=imageName]$imageName";
         echo $imageName
   
@@ -28,7 +28,7 @@ steps:
       command: 'build'
       Dockerfile: '**/Dockerfile'
       tags: '$(Build.BuildNumber)'
-      arguments: '--build-arg ProjectName=$(System.TeamProject)'
+      arguments: '--build-arg ProjectName=$(Build.SourceBranchName)'
       addPipelineData: false
       addBaseImageData: false
   
