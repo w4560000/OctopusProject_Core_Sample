@@ -16,11 +16,11 @@ steps:
     inputs:
       targetType: inline
       script: |
-        #projectName=$(echo $(Build.Repository.Name)| cut -d'/' -f 2)
-        #echo "##vso[task.setvariable variable=projectName;isOutput=true]$projectName";
-        #echo $projectName
+        projectName=$(echo $(Build.Repository.Name)| cut -d'/' -f 2)
+        echo "##vso[task.setvariable variable=projectName]$projectName";
+        echo $projectName
         imageName=$(echo "$(Build.Repository.Name)" | awk '{print tolower($0)}');
-        echo "##vso[task.setvariable variable=imageName;isOutput=true]$imageName";
+        echo "##vso[task.setvariable variable=imageName]$imageName";
         echo $imageName
   
   - task: Docker@2
