@@ -59,7 +59,7 @@ steps:
       PackageVersion: $(Build.BuildNumber)
       Include: 'appsettings*.json'
   
-  - task: OctopusPush@5
+  - task: OctopusPush@4
     displayName: Push Octopus Package
     inputs:
       OctoConnectedServiceName: 'octopus'
