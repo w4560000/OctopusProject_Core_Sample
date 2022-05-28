@@ -16,7 +16,7 @@ steps:
     inputs:
       targetType: inline
       script: |
-        projectName=$(echo $(Build.Repository.Name)2)
+        projectName=$(echo $(Build.Repository.Name)| cut -d'/' -f 2)
         echo "##vso[task.setvariable variable=projectName;isOutput=true]$projectName";
         imageName=$(echo "$projectName" | awk '{print tolower($0)}');
         echo "##vso[task.setvariable variable=imageName;isOutput=true]$imageName";
