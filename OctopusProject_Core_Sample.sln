@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusProject_Core_Sample", "OctopusProject_Core_Sample\OctopusProject_Core_Sample.csproj", "{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Debug|x86.Build.0 = Debug|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|x64.Build.0 = Release|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{CEC33432-61BF-4638-A5B8-888CFB2EB4DB}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
