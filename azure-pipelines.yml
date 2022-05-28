@@ -4,13 +4,11 @@ trigger:
 - qc
 - develop
 
+variables:
+- group: GCP
+
 pool:
   vmImage: 'ubuntu-latest'
-
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
 
 steps:
   - task: Bash@3
