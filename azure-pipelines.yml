@@ -36,6 +36,7 @@ steps:
       addBaseImageData: false
   
   - task: Docker@2
+    displayName: Push an image
     inputs:
       containerRegistry: 'gar'
       repository: '$(GCP_ProjectID)/web-repo/$(imageName)'
