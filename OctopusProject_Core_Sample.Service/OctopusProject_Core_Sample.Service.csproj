@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OctopusProject_Core_Sample.Repository\OctopusProject_Core_Sample.Repository.csproj" />
-    <ProjectReference Include="..\OctopusProject_Core_Sample.Service\OctopusProject_Core_Sample.Service.csproj" />
   </ItemGroup>
 
 </Project>

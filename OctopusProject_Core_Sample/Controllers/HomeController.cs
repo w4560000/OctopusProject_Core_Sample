@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using OctopusProject_Core_Sample.Models;
+using OctopusProject_Core_Sample.Repository.Models;
+using OctopusProject_Core_Sample.Service;
+using System.Diagnostics;
 
 namespace OctopusProject_Core_Sample.Controllers
 {
@@ -13,9 +12,21 @@ namespace OctopusProject_Core_Sample.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        /// <summary>
+        /// AppSettings
+        /// </summary>
+        private readonly AppSettings _appSettings;
+
+        private readonly ITestService _testService;
+
+        public HomeController(
+            ILogger<HomeController> logger,
+            IOptions<AppSettings> appSettings,
+            ITestService testService)
         {
             _logger = logger;
+            _appSettings = appSettings.Value;
+            _testService = testService;
         }
 
         public IActionResult Index()
@@ -32,6 +43,16 @@ namespace OctopusProject_Core_Sample.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult GetEnv()
+        {
+            return Json(_appSettings.Env);
+        }
+
+        public IActionResult Test()
+        {
+            return Json(_testService.Test());
         }
     }
 }
