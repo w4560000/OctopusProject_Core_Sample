@@ -1,0 +1,78 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
+trigger:
+- qc
+- develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+  - task: Bash@3
+    displayName: Transform Image Name
+    inputs:
+      targetType: inline
+      script: |
+        imageName=$(echo "$(Build.Repository.Name)" | awk '{print tolower($0)}');
+        echo "##vso[task.setvariable variable=imageName]$imageName";
+        echo $imageName
+  
+  - task: Docker@2
+    displayName: Build an image
+    inputs:
+      containerRegistry: 'gar'
+      repository: '$(GCP_ProjectID)/web-repo/$(imageName)'
+      command: 'build'
+      Dockerfile: '**/Dockerfile'
+      tags: '$(Build.BuildNumber)'
+      arguments: '--build-arg ProjectName=$(Build.Repository.Name)'
+      addPipelineData: false
+      addBaseImageData: false
+  
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'gar'
+      repository: '$(GCP_ProjectID)/web-repo/$(imageName)'
+      command: 'push'
+      tags: '$(Build.BuildNumber)'
+      addPipelineData: false
+      addBaseImageData: false
+
+  - task: Bash@3
+    displayName: Generate ReleaseNotes
+    inputs:
+      targetType: inline
+      script: |
+        git log -1 > ReleaseNotes.txt
+  
+  - task: OctopusPack@4
+    displayName: Prepare appsettings Octopus Package
+    inputs:
+      PackageId: $(imageName)
+      PackageFormat: 'Zip'
+      PackageVersion: $(Build.BuildNumber)
+      Include: 'appsettings*.json'
+  
+  - task: OctopusPush@5
+    displayName: Push Octopus Package
+    inputs:
+      OctoConnectedServiceName: 'octopus'
+      Space: 'Spaces-1'
+      Package: $(imageName).$(Build.BuildNumber).zip
+      Replace: 'false'
+  
+  - task: OctopusCreateRelease@5
+    displayName: Create Octopus Release
+    inputs:
+      OctoConnectedServiceName: 'octopus'
+      Space: 'Spaces-1'
+      ProjectGroup: 'Web-K8S'
+      ProjectName: 'Projects-41'
+      ReleaseNumber: '$(Build.BuildNumber)'
+      Channel: $(Build.SourceBranchName)
+      AdditionalArguments: '--releaseNoteFile=ReleaseNotes.txt'
