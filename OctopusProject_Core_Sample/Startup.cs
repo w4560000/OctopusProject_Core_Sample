@@ -31,6 +31,8 @@ namespace OctopusProject_Core_Sample
 
             // ª`¤J AppSetting
             services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,9 @@ namespace OctopusProject_Core_Sample
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // HealthChecks ¸ô®|
+            app.UseHealthChecks("/-/healthz");
 
             app.UseEndpoints(endpoints =>
             {
