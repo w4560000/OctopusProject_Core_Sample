@@ -54,5 +54,10 @@ namespace OctopusProject_Core_Sample.Controllers
         {
             return Json(_testService.Test());
         }
+
+        public void TestLog()
+        {
+            _logger.LogInformation(".net core 3.1 log test");
+        }
     }
 }
