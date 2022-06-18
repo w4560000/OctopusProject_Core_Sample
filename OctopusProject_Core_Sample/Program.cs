@@ -12,11 +12,6 @@ namespace OctopusProject_Core_Sample
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                    .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
-            LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
-
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -25,11 +20,11 @@ namespace OctopusProject_Core_Sample
                 .ConfigureLogging((hostContext, logging) =>
                 {
                     logging.ClearProviders();
+                    logging.AddNLogWeb(new NLogLoggingConfiguration(hostContext.Configuration.GetSection("NLog")));
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .UseNLog();
+                });
     }
 }
